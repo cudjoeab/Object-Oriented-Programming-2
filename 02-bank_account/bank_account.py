@@ -1,7 +1,7 @@
 #1 Create a bank account class 
 class BankAccount: 
 
-    interest_rate = .10 #2 Add a class variable called interest-rate
+    interest_rate = .01 #2 Add a class variable called interest-rate
     accounts = [] #3 class variable called accounts that starts as an empty string 
 
     def __init__(self, balance = 0): #constructor instance method with default balance of 0 
@@ -33,7 +33,7 @@ class BankAccount:
     def interest_time(cls): 
         print ('\n \t Total with Interest\t \n')
         for account in cls.accounts:
-            account.balance += account.balance * account.interest_rate
+            account.balance += account.balance * cls.interest_rate #the account balance calculated in the deposit and withdraw class methods
         return cls.accounts 
 
 
@@ -50,11 +50,10 @@ print(BankAccount.total_funds()) # 1200
 BankAccount.interest_time()
 print(my_account.balance) # 202.0 
 print(your_account.balance) # 1010.0
-print(accounts)
-# print(BankAccount.total_funds()) # 1212.0
-# my_account.withdraw(50)
-# print(my_account.balance) # 152.0
-# print(BankAccount.total_funds()) # 1162.0
+print(BankAccount.total_funds()) # 1212.0
+my_account.withdraw(50)
+print(my_account.balance) # 152.0
+print(BankAccount.total_funds()) # 1162.0
 
 
 
