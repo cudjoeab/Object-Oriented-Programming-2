@@ -11,29 +11,34 @@ class Zombie:
   default_strength = 3 
 
   def __init__(self, speed, strength):
-    """Initializes zombie's speed
+    """Initializes zombie's speed and strength
     """
     if speed > Zombie.max_speed:
       self.speed = Zombie.default_speed
     else:
       self.speed = speed
     
-    if strength > Zombie.max_strength
+    if strength > Zombie.max_strength:
+        self.strength = Zombie.default_strength
+    else: 
+        self.strength = strength 
+    
 #1 add a string magic mathod to print information about the zombies. 
   def __str__(self): 
-      return f'There are {len(Zombie.horde)} zombies in the horde.'
+      return f'The zombies have a speed of {self.speed} and strength of {self.strength}.'
 
   @classmethod
   def spawn(cls):
     """Spawns a random number of new zombies, based on the plague level,
-    adding each one to the horde.  Each zombie gets a random speed.
+    adding each one to the horde.  Each zombie gets a random speed and strength.
     """
     new_zombies = random.randint(1, Zombie.plague_level)
     count = 0
 
     while count < new_zombies:
+      strength = random.randint(1, Zombie.max_strength)
       speed = random.randint(1, Zombie.max_speed)
-      Zombie.horde.append(Zombie(speed))
+      Zombie.horde.append(Zombie(speed, strength))
       count += 1
 
   @classmethod
@@ -44,6 +49,7 @@ class Zombie:
     """
     Zombie.spawn()
     Zombie.some_die_off()
+    Zombie.increase_plague_level()
 
   @classmethod
   def some_die_off(cls):
@@ -56,16 +62,32 @@ class Zombie:
       Zombie.horde.pop(random_zombie)
       counter += 1
 
+
+  @classmethod
+  def increase_plague_level(cls):
+      """ Increases the plague level by some random number between 0 and 2"""
+      plague_increase = random.randint(0,3)
+      plague_increase += Zombie.plague_level
+
+
+
+
+
   def encounter(self):
     """This instance method represents you coming across a zombie! This can end in two possible outcomes:
     1. You outrun the zombie and escape unscathed!
     2. You don't outrun the zombie. It eats your brains and you die. :(
     Returns a summary of what happened.
     """
+
     outrun = self.chase()
+    outfight = self.fight()
 
     if outrun:
       return 'You escaped!'
+    elif outfight:
+       Zombie.spawn()
+       return 'Welcome to the horde.'
     else:
       return 'You died.'
 
@@ -76,7 +98,28 @@ class Zombie:
     your_speed = random.randint(1, Zombie.max_speed)
     return your_speed > self.speed
 
+  def fight(self):
+    """Represents you trying to fight this particular zombie.
+    Uses `Zombie.max_strength` to generate a random number that represents how your strength compared to the zombie's.
+    """
+    your_strength = random.randint(1, Zombie.max_strength)
+    return your_strength > self.strength
 
-zombie = Zombie(5) 
-print(zombie) 
+
+print(Zombie.horde) # []
+Zombie.new_day()
+print(Zombie.horde)
+zombie1 = Zombie.horde[0]
+print(zombie1) # Speed: 1 -- Strength: 7
+zombie2 = Zombie.horde[1]
+print(zombie2) # Speed: 2 -- Strength: 7
+print(zombie1.encounter()) # You escaped!
+print(zombie2.encounter()) # You fought the zombie and caught the plague.  You are now a zombie too.  Raaaawrgh
+Zombie.new_day()
+print(Zombie.horde) # [<__main__.Zombie object at 0x7f6f594f0d30>, <__main__.Zombie object at 0x7f6f594efef0>, <__main__.Zombie object at 0x7f6f594f0c50>, <__main__.Zombie object at 0x7f6f594f0cc0>]
+zombie1 = Zombie.horde[0]
+zombie2 = Zombie.horde[1]
+print(zombie1.encounter()) # You died!
+print(zombie2.encounter()) # You escaped!
+
 
