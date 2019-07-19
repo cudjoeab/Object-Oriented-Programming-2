@@ -16,7 +16,24 @@ class Vampires:
 
     @classmethod
     def drink_blood(self,name):
-        return f'{self.name} has fed.'
         self.drank_blood_today = True 
+        return f'{self.name} has fed.'
+    
+    @classmethod
+    def sunrise(cls):
+        for vampire in coven[]
+            if self.drank_blood_today = False:
+                in_coffin = False 
+    
+    @classmethod
+    def sunset (cls): 
+        for vamp in cls.coven:
+            vamp.in_coffin = False
+            vamp.drank_blood_today = False
+    
+
+        
+    
+
 
 
