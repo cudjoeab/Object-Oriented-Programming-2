@@ -1,4 +1,4 @@
-class Vampires: 
+class Vampire: 
     in_coffin = True 
     drank_blood_today = False
     coven = []
@@ -6,24 +6,26 @@ class Vampires:
     def __init__(self, name, age): 
         self.name = name 
         self.age = age
-        self.in_coffin = in_coffin
-        self.drank_blood_today = drank_blood_today
+    
+    def __str__(self):
+        return f'VAMPIRE name: {self.name}, age:{self.age}, location: {Vampire.in_coffin}, drank today?: {Vampire.drank_blood_today}.'
 
-    @classmethod
+    
     def new_vamp(self, name, age): 
         new_vamp = Vampire(name, age)
-        cls.coven.append(new_vamp)
+        self.coven.append(new_vamp)
+        print(f'Welcome {self.name}, age: {self.age}')
 
-    @classmethod
-    def drink_blood(self,name):
+    
+    def drink_blood(self):
         self.drank_blood_today = True 
         return f'{self.name} has fed.'
     
     @classmethod
     def sunrise(cls):
-        for vampire in coven[]
-            if self.drank_blood_today = False:
-                in_coffin = False 
+        for vampire in cls.coven:
+            if vamp.drank_blood_today == False:
+                vamp.in_coffin = False 
     
     @classmethod
     def sunset (cls): 
@@ -31,6 +33,31 @@ class Vampires:
             vamp.in_coffin = False
             vamp.drank_blood_today = False
     
+    def go_home(self):
+        print(f'{self.name} has returned to their coffin.')
+        self.in_coffin = True
+    
+bill = Vampire('Bill', 417)
+eric = Vampire('Eric', 1325)
+pam = Vampire('Pam', 240)
+tara = Vampire('Tara', 27)
+
+print(bill)
+print(eric)
+print(pam)
+print(tara)
+
+Vampire.sunset()
+print(bill.drink_blood())
+print(tara.drink_blood())
+
+tara.go_home()
+
+
+
+
+
+
 
         
     
